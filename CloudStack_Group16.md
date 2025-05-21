@@ -189,7 +189,7 @@ Pengaturan ini digunakan untuk mengonfigurasi database agar kompatibel dengan Cl
 - `sql-mode` memastikan validasi data yang ketat.  
 - `log-bin` dan `binlog-format` diaktifkan untuk mendukung replikasi dan pelacakan perubahan data.
 
-<img src="https://i.imgur.com/SrEHwrO.jpeg" width="600"/> ping
+<img src="https://i.imgur.com/SrEHwrO.jpeg" width="600"/>
 
 #### Restart Layanan MySQL
 ```
