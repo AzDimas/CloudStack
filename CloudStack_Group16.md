@@ -14,7 +14,6 @@
 CPU : Intel Core i5 Gen 8
 RAM : 24 GB
 Storage : 200GB
-Network : Ethernet 10GB/s
 Operating System : Ubuntu Server 24.04
 ```
 
@@ -88,7 +87,10 @@ Bagian ini membuat sebuah *bridge interface* bernama `cloudbr0` yang menghubungk
 - `routes` untuk mengatur jalur/route traffic, routes yang digunakan adalah default (0.0.0.0) yang melalui alamat default gateway (192,168.0.1)
 -`nameservers` untuk mengatur DNS yang digunakan, yaitu 1.1.1.1 (Cloudfare) dan 8.8.8.8 (Google).  
 - Penggunaan *bridge* penting untuk kebutuhan virtualisasi, karena memungkinkan VM berbagi koneksi jaringan secara langsung.
+
+<img src="https://i.imgur.com/zsy6mBc.jpeg" width="600"/>
 ---
+
 
 ### Menerapkan Konfigurasi Jaringan
 
@@ -101,13 +103,15 @@ reboot                  # Reboot sistem
 Setelah konfigurasi disimpan, perintah `netplan generate` dan `netplan apply` digunakan untuk menerapkan pengaturan jaringan baru. Sistem kemudian di-*reboot* agar semua perubahan benar-benar aktif dan stabil.
 
 
-
 ### Menguji Koneksi Jaringan
 
 ```
 ip address        # Melihat IP address dan interface jaringan yang aktif
-ping google.com   # Mengirim ping ke google.com untuk memastikan konfigurasi jaringan sudah benar dan VM bisa menggunakan jaringan internet dengan baik
+ping 8.8.8.8      # Mengirim ping ke google untuk memastikan konfigurasi jaringan sudah benar dan VM bisa menggunakan jaringan internet dengan baik
 ```
+<img src="https://i.imgur.com/xhqBzSp.jpeg" width="600"/>
+
+<img src="https://i.imgur.com/q8LV8gk.jpeg" width="600"/>
 
 Langkah ini bertujuan untuk memastikan bahwa konfigurasi jaringan yang telah dibuat sebelumnya sudah berhasil diterapkan dan sistem bisa mengakses jaringan eksternal (internet).
 
@@ -184,6 +188,8 @@ binlog-format = 'ROW'
 Pengaturan ini digunakan untuk mengonfigurasi database agar kompatibel dengan CloudStack.  
 - `sql-mode` memastikan validasi data yang ketat.  
 - `log-bin` dan `binlog-format` diaktifkan untuk mendukung replikasi dan pelacakan perubahan data.
+
+<img src="https://i.imgur.com/SrEHwrO.jpeg" width="600"/> ping
 
 #### Restart Layanan MySQL
 ```
@@ -424,6 +430,7 @@ Command ini bertujuan untuk menghapus profil virt-aa-helper dari sistem AppArmor
 cloudstack-setup-management
 systemctl status cloudstack-management
 ```
+<img src="https://i.imgur.com/GL6rk65.jpeg" width="600"/> 
 
 - `cloudstack-setup-management`. Men-setup manajemen server CloudStack termasuk IP dan koneksi database.
 - `systemctl status`. Memeriksa apakah layanan berhasil berjalan.
@@ -436,38 +443,61 @@ systemctl status cloudstack-management
 http://<IP_ADDRESS>:8080
 ```
 
-Contoh::
+Contoh:
 
 ```
-http://125.165.153.204:8080/client
+http://192.168.0.10:8080/client
 ```
+<img src="https://i.imgur.com/CZd7l7A.jpeg" width="600"/> 
 
-### Install NGROK agar dapat diakses secara remote.
-
-```
-# Melakukan update paket pada Ubuntu
-sudo apt update 
-
-# Meng-install wget dan unzip
-sudo apt install wget unzip 
-
-# wget digunakan untuk download file dari internet. File yang di-download adalah file ZIP untuk ngrok dari link tersebut
-wget https://bin.equinox.io/c/4VmDzA7iaJ8/ngrok-stable-linux-amd64.zip 
-
-# unzip digunakan untuk mengekstrak file ZIP. File ZIP yang diekstrak adalah file ngrok yang di-download sebelumnya
-unzip ngrok-stable-linux-amd64.zip
-
-# Memindahkan folder ngrok ke /usr/local/bin
-sudo mv ngrok /usr/local/bin 
+### Menginstal paket WireGuard dan resolvconf. resolvconf membantu mengelola DNS ketika VPN aktif.
 
 ```
-
-```
-# Melakukan autentikasi ngrok dengan authentication token yang diberikan
-ngrok authtoken <your-ngrok-auth-token> 
+sudo apt install wireguard resolvconf
 ```
 
+
+### Membuka atau membuat file konfigurasi WireGuard dengan nama SNetff7ac99e.conf. Nama file ini akan menjadi nama interface WireGuard.
+
 ```
-# Ngrok menjalankan service-nya di port 8080
-ngrok http 8080 
+sudo nano /etc/wireguard/SNetff7ac99e.conf
 ```
+
+<img src="https://i.imgur.com/WXQIsIz.png" width="600"/> 
+
+
+### Mengaktifkan interface VPN dengan konfigurasi SNetff7ac99e.conf. VPN akan mulai menerima koneksi.
+
+
+```
+sudo wg-quick up SNetff7ac99e
+```
+
+### Membuat layanan VPN ini otomatis aktif setiap kali server boot.
+
+```
+sudo systemctl enable wg-quick@SNetff7ac99e
+```
+
+### Menampilkan status WireGuard saat ini: termasuk interface aktif, peer yang terhubung, transfer data, dan durasi koneksi.
+
+```
+sudo wg show
+```
+
+<img src="https://i.imgur.com/MK8S3IB.jpeg" width="600"/> 
+
+
+### Akses Dashboard Apache Cloudstack lewat VPN sudah bisa dilakukan. Begitu juga dengan SSH
+
+```
+http://columba.s-net.id:9611/client/
+```
+
+<img src="https://i.imgur.com/vWNhR1o.png" width="600"/> 
+
+### Akses Ubuntu Server lewat SSH juga telah bisa dilakukan
+
+<img src="https://i.imgur.com/nqAUdWR.png" width="600"/> 
+
+<img src="https://i.imgur.com/afeiI9X.png" width="600"/> 
