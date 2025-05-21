@@ -450,6 +450,152 @@ http://192.168.0.10:8080/client
 ```
 <img src="https://i.imgur.com/CZd7l7A.jpeg" width="600"/> 
 
+### Konfigurasi Awal Cloud
+Login Apache Cloudstack dengan username: admin dan password: password sebagai default.
+
+### Buat Password baru untuk masuk ke dashboard Cloudstack
+
+<img src="https://i.imgur.com/6RXbdub.jpeg" width="600"/> 
+
+### Pilih Tipe Zone
+
+Terdapat pilihan Core atau Edge. Disini kelompok 16 memilih Core.
+
+### Pilih Tipe Core Zone (Advanced/Basic)
+
+Terdapat pilihan Advance dan Basic. Disini kelompok 16 memilih Basic.
+
+### Buat Detail Zone
+
+<img src="https://i.imgur.com/hL3EcRl.png" width="600"/> 
+
+Isi dengan ketentuan berikut:
+
+```
+Name              : NEW-ZONE
+IPv4 DNS1         : 8.8.8.8
+Internal DNS 1    : 192.168.0.1
+Hypervisor        : KVM
+```
+
+### Buat Network untuk Cloudstack
+
+1. Physical Network
+ 
+    <img src="https://i.imgur.com/FTM2zmh.png" width="600"/> 
+
+2. Pod
+
+    <img src="https://i.imgur.com/Pgfqxta.png" width="600"/> 
+
+    Isi dengan ketentuan berikut:
+
+    ```
+    Pod name                  : NEW-POD
+    Reserved system gateway   : 192.168.0.1
+    Reserved system netmask   : 255.255.255.0
+    Start reserved system IP  : 192.168.0.81
+    End reserved system IP    : 192.168.0.90
+    ```
+
+3. Guest traffic
+
+    <img src="https://i.imgur.com/oxv9Ulk.png" width="600"/> 
+
+    Isi dengan ketentuan berikut:
+
+    ```
+    Guest gateway    : 192.168.0.1
+    Guest netmask    : 255.255.255.0
+    Guest start IP   : 192.168.0.111
+    Guest end IP     : 192.168.0.120
+    ```
+
+### Tambahkan Resources
+
+1. Cluster
+ 
+    <img src="https://i.imgur.com/QkU5fNj.png" width="600"/> 
+
+2. IP address
+
+    <img src="https://i.imgur.com/YdzXEd2.png" width="600"/> 
+
+    Isi dengan ketentuan berikut:
+
+    ```
+    Host name : 192.168.0.10
+    username  : root
+    password  : *******
+    ```
+
+3. Primary Storage
+
+    <img src="https://i.imgur.com/tDWahHW.png" width="600"/> 
+
+    Isi dengan ketentuan berikut:
+
+    ```
+    Name     : NEW-PRISTORE
+    Scope    : Zone
+    Protocol : nfs
+    Server   : 192.168.0.10
+    Path     : /export/primary
+    ```
+
+4. Secondary Storage
+
+    <img src="https://i.imgur.com/8UyOUFJ.png" width="600"/> 
+
+    Isi dengan ketentuan berikut:
+
+    ```
+    Provider : NFS
+    Name     : NEW-SECSTORE
+    Server   : 192.168.0.10
+    Path     : /export/primary
+    ```
+
+### Launch Zone yang telah dibuat
+
+<img src="https://i.imgur.com/yfAMdMo.jpeg" width="600"/> 
+
+### Adopsi ISO (bebas) yang akan dijalankan di Apache Cloudstack. Disini Kelompok 16 memilih Linux Fedora karena ringan.
+
+<img src="https://i.imgur.com/CxG09f9.png" width="600"/> 
+
+### Tunggu sampai ISO yang diadopsi 'Ready' untuk digunakan
+
+<img src="https://i.imgur.com/gUtU5Vc.png" width="600"/> 
+
+### Buat Instance baru dengan nama Big Instance yang akan digunakan untuk menjalankan Linux
+
+<img src="https://i.imgur.com/n83njfd.png" width="600"/> 
+<img src="https://i.imgur.com/N7UQzPB.png" width="600"/> 
+
+### Compute Instance dengan beberapa konfigurasi yang telah dibuat
+
+<img src="https://i.imgur.com/N2zEvpP.png" width="600"/> 
+<img src="https://i.imgur.com/nGwlkx2.png" width="600"/> 
+<img src="https://i.imgur.com/6aDLqeE.png" width="600"/> 
+
+### Launch Instance dan tunggu sampai statenya bertulisan Running
+
+<img src="https://i.imgur.com/jHK1jHU.png" width="600"/> 
+<img src="https://i.imgur.com/4TnxMEz.png" width="600"/> 
+
+### View Console dan tunggu sampai Linux Fedora berjalan dengan baik
+
+<img src="https://i.imgur.com/tiEuvV8.png" width="600"/>
+
+### Tes Ping dengan Linux Fedora
+
+<img src="https://i.imgur.com/wpXYosL.png" width="600"/>
+
+
+## KONFIGURASI TAMBAHAN (SSH)
+## UBUNTU SERVER
+
 ### Menginstal paket WireGuard dan resolvconf. resolvconf membantu mengelola DNS ketika VPN aktif.
 
 ```
@@ -501,3 +647,51 @@ http://columba.s-net.id:9611/client/
 <img src="https://i.imgur.com/nqAUdWR.png" width="600"/> 
 
 <img src="https://i.imgur.com/afeiI9X.png" width="600"/> 
+
+## LINUX FEDORA
+
+### Menginstal paket WireGuard dan resolvconf. resolvconf membantu mengelola DNS ketika VPN aktif.
+
+```
+dnf install -y wireguard-tools resolvconf
+```
+
+
+### Membuka atau membuat file konfigurasi WireGuard dengan nama SNetff7ac99e.conf. Nama file ini akan menjadi nama interface WireGuard.
+
+```
+sudo nano /etc/wireguard/SNet8b389335.conf
+```
+
+<img src="https://i.imgur.com/4je3fkP.png" width="600"/> 
+
+
+### Mengaktifkan interface VPN dengan konfigurasi SNetff7ac99e.conf. VPN akan mulai menerima koneksi.
+
+
+```
+sudo wg-quick up SNet8b389335
+```
+
+### Membuat layanan VPN ini otomatis aktif setiap kali server boot.
+
+```
+sudo systemctl enable wg-quick@SNet8b389335
+```
+
+### Menampilkan status WireGuard saat ini: termasuk interface aktif, peer yang terhubung, transfer data, dan durasi koneksi.
+
+```
+sudo wg show
+```
+
+<img src="https://i.imgur.com/oc0F4mX.png" width="600"/> 
+
+### Memastikan layanan SSH di Linux Fedora sudah aktif
+
+<img src="https://i.imgur.com/3qdHv3j.png" width="600"/> 
+
+### Akses Linux Fedora lewat SSH telah bisa dilakukan
+
+<img src="https://i.imgur.com/tgM2BJP.png" width="600"/> 
+
