@@ -586,12 +586,17 @@ Hypervisor        : KVM
 
 ### View Console dan tunggu sampai Linux Fedora berjalan dengan baik
 
-<img src="https://i.imgur.com/tiEuvV8.png" width="600"/>
+<img src="https://i.imgur.com/Uy1ieBe.png" width="600"/>
 
 ### Tes Ping dengan Linux Fedora
 
 <img src="https://i.imgur.com/wpXYosL.png" width="600"/>
 
+### Tes Internet dengan Linux Fedora
+
+<img src="https://i.imgur.com/eMEA4zS.png" width="600"/>
+
+<img src="https://i.imgur.com/rBCLj5Q.png" width="600"/>
 
 ## KONFIGURASI TAMBAHAN (SSH)
 ## UBUNTU SERVER
