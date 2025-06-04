@@ -5,6 +5,10 @@
 - Yasmin Devina Sinuraya - 2206817244
 - Fabsesya Muhammad - 2206829433
 
+## Video Tutorial Instalasi
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
 
 ## Persiapan 
 
@@ -601,6 +605,25 @@ Hypervisor        : KVM
 ## KONFIGURASI TAMBAHAN (SSH)
 ## UBUNTU SERVER
 
+### Install OpenSSH Server (jika belum terpasang).
+
+```
+sudo apt update
+sudo apt install openssh-server
+```
+
+### Aktifkan dan jalankan layanan SSH.
+
+```
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+
+### Cek status layanan SSH.
+
+<img src="https://i.imgur.com/fmEZzPK.png" width="600"/>
+
+
 ### Menginstal paket WireGuard dan resolvconf. resolvconf membantu mengelola DNS ketika VPN aktif.
 
 ```
@@ -655,6 +678,23 @@ http://columba.s-net.id:9611/client/
 
 ## LINUX FEDORA
 
+### Install OpenSSH Server (jika belum terpasang).
+
+```
+sudo dnf install openssh-server
+```
+
+### Aktifkan dan jalankan layanan SSH.
+
+```
+sudo systemctl enable sshd
+sudo systemctl start sshd
+```
+
+### Cek status layanan SSH.
+
+<img src="https://i.imgur.com/KVi1uNh.png" width="600"/>
+
 ### Menginstal paket WireGuard dan resolvconf. resolvconf membantu mengelola DNS ketika VPN aktif.
 
 ```
@@ -700,3 +740,4 @@ sudo wg show
 
 <img src="https://i.imgur.com/tgM2BJP.png" width="600"/> 
 
+## TERIMA KASIH
