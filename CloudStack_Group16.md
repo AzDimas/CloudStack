@@ -1,4 +1,10 @@
 # Dokumentasi Instalasi Apache Cloudstack
+
+<p align="center">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUbciY5_TAfLBxqOht-KedyV-ZArXNwgF48ZW8SIHZoTwd0xIMCM5kLrQ4eUQBZt0lBkdc-hY3yfmff-U87xNbFWonHR0P29NYFLUoldESPmz0E6nw2k0QFM1aQr2R_tVFOd7fMxbZ3viDWshiTZ5j37ZX7Lh4AOaNQkZp7U1Fy8bo3dx_K0fa3g/w187-h320/UI%20(Universitas%20Indonesia)%20Logo%20-%20(Koleksilogo.com).png" width="200">
+</p>
+
+
 ## Group 16:
 - Sihombing Giovano Geraldo - 2206059566
 - Azriel Dimas Ash-Shidiqi - 2206059414
