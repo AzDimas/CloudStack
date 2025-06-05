@@ -5,6 +5,15 @@
 - Yasmin Devina Sinuraya - 2206817244
 - Fabsesya Muhammad - 2206829433
 
+## Referensi:
+
+1. Ahmad Rifqi. (2023). *CloudStack Install and Configure*. GitHub Repository.  
+   [https://github.com/AhmadRifqi86/cloudstack-install-and-configure](https://github.com/AhmadRifqi86/cloudstack-install-and-configure)
+
+2. Bakshi, K. (2018). *A Tutorial on CloudStack*. In Cloud Computing Technologies for Green Enterprise Architectures. IGI Global.  
+   [https://www.igi-global.com/chapter/a-tutorial-on-cloudstack/188131](https://www.igi-global.com/chapter/a-tutorial-on-cloudstack/188131)
+
+
 ## Video Tutorial Instalasi
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/4AYp0Dg0cTE/0.jpg)](https://www.youtube.com/watch?v=4AYp0Dg0cTE)
