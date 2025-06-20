@@ -15,9 +15,9 @@
 
 ## Apache CloudStack
 Apache Cloudstack adalah sebuah platform Cloud Computing yang dimiliki oleh Apache. Bersifat Open-Source dan digunakan untuk membangun layanan IaaS seperti AWS. Beberapa Karakteristiknya:
-● Dapat digunakan untuk cloud pribadi, publik, atau hybrid.
-● Mendukung berbagai hypervisor seperti KVM, XenServer, VMware.
-● Cocok untuk organisasi yang ingin mengelola cloudnya sendiri
+* Dapat digunakan untuk cloud pribadi, publik, atau hybrid.
+* Mendukung berbagai hypervisor seperti KVM, XenServer, VMware.
+* Cocok untuk organisasi yang ingin mengelola cloudnya sendiri
 
 ## Langkah-langkah Implementasi CloudStack
 1. Mempersiapkan sistem yang akan digunakan.
