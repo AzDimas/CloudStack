@@ -31,7 +31,7 @@ Apache Cloudstack adalah sebuah platform Cloud Computing yang dimiliki oleh Apac
 
 
 ## Ilustrasi Topologi Implementasi CloudStack
-![Untitled Diagram.drawio(9)](https://hackmd.io/_uploads/rJBfmjCMxl.png)
+<img src="https://i.imgur.com/CWjQyRq.png" width="600"/>
 
 
 
